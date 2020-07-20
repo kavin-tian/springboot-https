@@ -1,0 +1,123 @@
+
+springboot-https-server //服务端
+springboot-https-client  //andorid客户端
+keys  //生成的秘钥
+
+
+
+
+第一步:
+生成秘钥:
+
+    生成客户端证书
+    keytool -genkey -v -alias client -keyalg RSA -validity 3650 -storetype PKCS12 -keystore client.key.p12
+
+    生成服务器证书
+    keytool -genkey -v -alias server -keyalg RSA -validity 3650 -storetype PKCS12 -keystore server.key.p12
+
+    生成服务器证书信任库
+     keytool -genkey -v -alias trust -keyalg RSA  -validity 3650 -storetype PKCS12 -keystore trust.key.p12
+
+    导出客户端公钥
+    keytool -keystore client.key.p12 -export -alias client -file client.cer
+
+    把客户端公钥添加到服务器信任证书库
+    keytool -import -v -file client.cer -keystore trust.key.p12
+
+    导出服务器公钥
+     keytool -keystore server.key.p12 -export -alias server -file server.cer
+
+    生成客户端证书信任库
+     keytool -genkey -v -alias trust -keyalg RSA  -validity 3650 -storetype PKCS12 -keystore client_trust.key.p12
+
+    导入服务器公钥到客户端信任库
+    keytool -import -v -file server.cer -keystore client_trust.key.p12
+
+
+    把client.key.p12   和 server.cer (或client_trust.key.p12) 给客户端。
+
+    springboot-https-keys目录下是我按上面生成的秘钥
+
+
+
+服务端:
+
+第二步:
+    把server.key.p12 和 trust.key.p12 拷到项目根目录
+
+
+
+第三步:
+    与application.properties同级目录
+    application.yml配置
+
+        server:
+
+          ssl:
+
+            #    keyStore密钥库，存放了服务端证书的私钥、公钥和证书
+            key-store: server.key.p12
+            key-store-password: 123456
+            #key-store-type: PKCS12
+            key-store-type: JKS
+            key-alias: server
+
+            #    client-auth: want
+            # trustStore信任库，存放了服务端信任的客户端证书的公钥文件
+            protocol: TLS
+            client-auth: need
+            trust-store:  trust.key.p12
+            trust-store-password: 123456
+            trust-store-type: JKS
+            trust-store-provider: SUN
+
+          port: 8443
+
+
+
+第四步:
+编写Demo中代码
+
+@RestController
+public class Demo {
+
+    @GetMapping("/get")
+    public String get(HttpServletRequest request) {
+
+        String name = request.getParameter("name");
+        System.out.println(name);
+
+        JSONObject result = new JSONObject();
+        result.put("msg", "ok");
+        result.put("method", "json");
+        result.put("data", name);
+        return result.toJSONString();
+    }
+
+    /**
+     * 功能描述:通过request的方式来获取到json数据<br/>
+     * jsonobject 这个是阿里的 fastjson对象
+     */
+    @ResponseBody
+    @RequestMapping(value = "/post", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public String getByJSON(@RequestBody JSONObject jsonParam) {
+        // 直接将json信息打印出来
+        System.out.println(jsonParam.toJSONString());
+
+        // 将获取的json数据封装一层，然后在给返回
+        JSONObject result = new JSONObject();
+        result.put("msg", "ok");
+        result.put("method", "json");
+        result.put("data", jsonParam);
+
+        return result.toJSONString();
+    }
+
+}
+
+
+客户端: 省略
+
+
+
+

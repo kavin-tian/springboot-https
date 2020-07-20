@@ -1,0 +1,21 @@
+server:
+
+  ssl:
+
+    #    keyStore密钥库，存放了服务端证书的私钥、公钥和证书
+    key-store: server.key.p12
+    key-store-password: 123456
+    #key-store-type: PKCS12
+    key-store-type: JKS
+    key-alias: server
+
+    #    client-auth: want
+    # trustStore信任库，存放了服务端信任的客户端证书的公钥文件
+    protocol: TLS
+    client-auth: need
+    trust-store:  trust.key.p12
+    trust-store-password: 123456
+    trust-store-type: JKS
+    trust-store-provider: SUN
+
+  port: 8443
