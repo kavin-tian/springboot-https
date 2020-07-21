@@ -27,7 +27,7 @@ public class RetrofitActivity extends AppCompatActivity {
             switch (msg.what) {
                 case MSG_WHAT:
                     if (msg.obj == null) {
-                        tv.setText("请求异常");
+                        tv.setText("请求失败");
                     } else {
                         String json = (String) msg.obj;
                         tv.setText(json);
@@ -43,7 +43,7 @@ public class RetrofitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrofit);
         tv = findViewById(R.id.data);
-        setTitle("Retrofit框架https双向论证");
+        setTitle("Retrofit框架https双向认证");
 
     }
 

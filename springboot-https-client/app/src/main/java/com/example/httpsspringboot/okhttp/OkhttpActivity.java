@@ -43,6 +43,7 @@ public class OkhttpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv = findViewById(R.id.data);
+        setTitle("OkHttp框架https双向认证");
     }
 
     private String getUrl = "https://192.168.0.104:8443/get?name=kavin";

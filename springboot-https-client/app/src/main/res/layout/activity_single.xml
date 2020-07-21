@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="注意:\n 单向论证时需要把服务器application.yml配置文件参数:\n client-auth: none (关闭验证客户端)" />
+        android:text="注意:\n 单向认证时需要把服务器application.yml配置文件参数:\n client-auth: none (关闭验证客户端)" />
 
     <Button
         android:layout_width="match_parent"

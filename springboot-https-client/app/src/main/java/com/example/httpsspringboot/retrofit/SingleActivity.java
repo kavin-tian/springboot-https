@@ -30,7 +30,7 @@ public class SingleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single);
-        setTitle("单向论证");
+        setTitle("httpsURLConnection单向认证");
         tv = findViewById(R.id.data);
     }
 

@@ -15,7 +15,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="单向论证"
+        android:text="单向认证"
         android:onClick="openSingle"
         android:textAllCaps="false" />
 
