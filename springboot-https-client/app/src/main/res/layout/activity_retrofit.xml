@@ -4,8 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".okhttp.OkhttpActivity">
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="openOkhttp"
+        android:onClick="openOkhttp"
+        android:textAllCaps="false" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单向论证"
+        android:onClick="openSingle"
+        android:textAllCaps="false" />
 
     <TextView
         android:id="@+id/data"

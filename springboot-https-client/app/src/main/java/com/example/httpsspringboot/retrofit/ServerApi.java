@@ -10,9 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ServerApi {
-    /**
-     * 定义了一个业务方法，获取订单，
-     */
+
     @GET("get")//指定该方法要请求的url，注意方法的路径不要以/开头，如/test，是错误的
     Call<ResponseInfo> get();
 

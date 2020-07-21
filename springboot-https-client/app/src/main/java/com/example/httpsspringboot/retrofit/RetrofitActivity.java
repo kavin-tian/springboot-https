@@ -1,6 +1,7 @@
 package com.example.httpsspringboot.retrofit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.httpsspringboot.R;
+import com.example.httpsspringboot.okhttp.OkhttpActivity;
 
 import java.io.IOException;
 
@@ -41,6 +43,7 @@ public class RetrofitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrofit);
         tv = findViewById(R.id.data);
+        setTitle("Retrofit框架https双向论证");
 
     }
 
@@ -76,4 +79,13 @@ public class RetrofitActivity extends AppCompatActivity {
 
     }
 
+    public void openOkhttp(View view) {
+        Intent intent = new Intent(this, OkhttpActivity.class);
+        startActivity(intent);
+    }
+
+    public void openSingle(View view) {
+        Intent intent = new Intent(this, SingleActivity.class);
+        startActivity(intent);
+    }
 }
