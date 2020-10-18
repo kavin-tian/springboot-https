@@ -6,12 +6,9 @@ import android.util.Log;
 
 import com.example.httpsspringboot.MyApp;
 import com.example.httpsspringboot.Student;
-import com.example.httpsspringboot.TrustAllCerts;
+import com.example.httpsspringboot.SslUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -29,8 +26,11 @@ public class HttpRequest {
 
     private HttpRequest() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .sslSocketFactory(TrustAllCerts.getSSLSocketFactory(MyApp.appContext))
-                .hostnameVerifier(new TrustAllCerts.TrustAllHostnameVerifier())
+                .sslSocketFactory(SslUtils.getSSLSocketFactorySingle(MyApp.appContext)) //单向认证，客户端信任服务器
+                //.sslSocketFactory(SslUtils.getSSLSocketFactory(MyApp.appContext)) //双向认证
+                //.sslSocketFactory(SslUtils.createSSLSocketFactory()) //单向认证，客户端信任所有服务器，有bug
+                //.sslSocketFactory(SslUtils.createSSLSocketFactory2()) //单向认证，客户端信指定任服务器，有bug
+                .hostnameVerifier(new SslUtils.TrustAllHostnameVerifier())
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();

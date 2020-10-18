@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.httpsspringboot.R;
 import com.example.httpsspringboot.Student;
+import com.example.httpsspringboot.Urls;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -46,8 +47,8 @@ public class OkhttpActivity extends AppCompatActivity {
         setTitle("OkHttp框架https双向认证");
     }
 
-    private String getUrl = "https://192.168.0.104:8443/get?name=kavin";
-    private String postUrl = "https://192.168.0.104:8443/post";
+    private String getUrl = Urls.baseUrl + "get?name=kavin";
+    private String postUrl = Urls.baseUrl + "post";
 
 
     public void doGet(View view) {

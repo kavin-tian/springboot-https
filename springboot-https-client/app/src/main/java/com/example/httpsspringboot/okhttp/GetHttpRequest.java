@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.example.httpsspringboot.TrustAllCerts;
+import com.example.httpsspringboot.SslUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -32,8 +32,8 @@ public class GetHttpRequest {
         this.handler = handler;
         this.context = context;
         this.okHttpClient = new OkHttpClient.Builder()
-                .sslSocketFactory(TrustAllCerts.getSSLSocketFactory(context))
-                .hostnameVerifier(new TrustAllCerts.TrustAllHostnameVerifier())
+                .sslSocketFactory(SslUtils.getSSLSocketFactory(context))
+                .hostnameVerifier(new SslUtils.TrustAllHostnameVerifier())
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();

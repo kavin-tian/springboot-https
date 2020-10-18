@@ -69,7 +69,7 @@ public class SingleActivity extends AppCompatActivity {
             SSLContext context = SSLContext.getInstance("TLS");
             context.init(null, tmf.getTrustManagers(), null);
             //通过HttpsURLConnection设置链接
-            URL url = new URL("https://192.168.0.104:8443/get");
+            URL url = new URL(Urls.BASE_URL+"get");
             HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url
                     .openConnection();
             httpsURLConnection.setSSLSocketFactory(context.getSocketFactory());
