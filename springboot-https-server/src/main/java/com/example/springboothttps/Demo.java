@@ -4,19 +4,23 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RestController
 public class Demo {
-
+    private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
     @GetMapping("/get")
     public String get(HttpServletRequest request) {
 
         String name = request.getParameter("name");
         System.out.println(name);
 
+        String datetime = mSimpleDateFormat.format(new Date());
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", "kavin");
         jsonObject.put("age", "18");
+        jsonObject.put("datetime", datetime);
 
         JSONObject result = new JSONObject();
         result.put("code", "0");
